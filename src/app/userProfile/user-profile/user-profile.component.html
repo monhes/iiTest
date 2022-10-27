@@ -1,1 +1,52 @@
-<p>user-profile works!</p>
+<p>user info</p>
+<button (click)="openEditPanel()">edit</button> <button (click)="logout()">LOGOUT</button>
+<div class="grid-container" >
+<div *ngIf="disUsername != null" class="grid-movie movie-card"> 
+        <h3>username</h3>
+        <h2>{{disUsername}}</h2>  
+        <h3>first name</h3>
+        <h2>{{disFirstname}}</h2>
+        <h3>last name</h3>
+        <h2>{{disLastname}}</h2>
+        <img src="{{disImage}}" alt="" height="200px" width="200px">
+         
+</div> 
+<div class="grid-movie movie-card" [hidden]="editPanel">
+<form [formGroup]="userEditInfo" (submit)="edittUser()"  > 
+    <br>
+
+    <mat-form-field  >
+        <mat-label>Password</mat-label> 
+        <input matInput formControlName="password"  (input)="testnum($event)">
+        <mat-hint>enter password</mat-hint>
+        <mat-error *ngIf="password?.invalid && password?.touched">require password minimum 6</mat-error>
+    </mat-form-field>
+    <p *ngIf="!(PWnotpass)" style="color: red;"> require password not sequence</p>
+    <br>
+
+    <mat-form-field  > 
+        <mat-label>FirstName</mat-label> 
+        <input matInput formControlName="firstName"  >
+        <mat-hint>enter firstName</mat-hint>
+        <mat-error *ngIf="firstName?.invalid && firstName?.touched">require firstName</mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field  > 
+        <mat-label>LastName</mat-label> 
+        <input matInput formControlName="lastName" >
+        <mat-hint>enter lastName</mat-hint>
+        <mat-error *ngIf="lastName?.invalid && lastName?.touched">require lastName</mat-error>
+    </mat-form-field>
+    <br> 
+    <br>
+    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+    <p *ngIf="this.typeimage != null">{{this.typeimage[0]}}.{{this.typeimage[1]}}</p>
+    <input hidden (change)="onImageSelected($event)" #fileInput type="file">
+    <mat-error *ngIf="!(acceptImage)">require file type PNG JPG JPEG BMP MAXIMUM 5MB</mat-error>
+    <br><br>
+    <button mat-raised-button (click)="openEditPanel()" type="submit" [disabled]="userEditInfo.invalid || !(acceptImage) || !(PWnotpass)">submit register</button>
+    
+</form>
+</div>
+</div>

@@ -1,9 +1,37 @@
-<p>user-login works!</p>
-<div class="main">
-    <input type="text" placeholder="Username">
-    <br>
-    <input type="text" placeholder="Password">
-    <br>
-    <a routerLink="/login"><button>Login</button> </a>
-    <a routerLink="/register"><button>Register</button></a>
+ 
+<p>user-login</p> 
+<div  *ngIf="currPagenum == 1">
+  <form [formGroup]="userLoginInfo" (submit)="login()">
+    <mat-form-field appearance="legacy" class="example-full-width"> 
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="userName" >
+        <mat-hint>enter username</mat-hint>
+        <mat-error *ngIf="userName?.invalid && userName?.touched">required username</mat-error>
+    </mat-form-field>
+    <br><br><br>
+    <mat-form-field appearance="legacy" class="example-full-width">
+        <mat-label>Password</mat-label> 
+        <input matInput formControlName="password" >
+        <mat-hint>enter password</mat-hint>
+        <mat-error *ngIf="password?.invalid && password?.touched">required password</mat-error>
+    </mat-form-field>
+    <br><br>
+    
+    <button type="submit" [disabled]="userLoginInfo.invalid || hidelogin">login</button>
+
+  </form>
+     <button [disabled]="hidelogin" (click)="regist()">register</button>
+</div>   
+ 
+---------------------------------------------------------------------------------------------------
+<div class="grid-container"></div>
+<div [hidden]="hideregist" class="grid-movie movie-card"> 
+  <app-user-register (childnum)="PageSwitch($event)"  ></app-user-register>
 </div>
+
+<div  [hidden]="hideprofile" class="grid-movie movie-card"> 
+  <app-user-profile (childnum)="PageSwitch($event)"  #bobbin [events]="eventsSubject.asObservable()"></app-user-profile>
+</div>
+
+ 
+ 

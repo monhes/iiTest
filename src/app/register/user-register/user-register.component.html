@@ -1,1 +1,44 @@
-<p>user-register works!</p>
+<p>user-register</p>
+<form [formGroup]="userRegistInfo" (submit)="registUser()">
+    <mat-form-field  > 
+        <mat-label>User</mat-label> 
+        <input matInput formControlName="userName"  >
+        <mat-hint>enter username</mat-hint>
+        <mat-error *ngIf="userName?.invalid && userName?.touched">a-z,A-Z,0-9,_ range 4-12</mat-error> 
+    </mat-form-field>
+    <br>
+
+    <mat-form-field  >
+        <mat-label>Password</mat-label> 
+        <input matInput formControlName="password" (input)="testnum($event)">
+        <mat-hint>enter password</mat-hint>
+        <mat-error *ngIf="password?.invalid && password?.touched">require password minimum 6</mat-error> 
+    </mat-form-field>
+    <p *ngIf="!(PWnotpass)" style="color: red;"> require password not sequence</p>
+    <br>
+
+    <mat-form-field  > 
+        <mat-label>FirstName</mat-label> 
+        <input matInput formControlName="firstName"  >
+        <mat-hint>enter firstName</mat-hint>
+        <mat-error *ngIf="firstName?.invalid && firstName?.touched">require firstName</mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field  > 
+        <mat-label>LastName</mat-label> 
+        <input matInput formControlName="lastName" >
+        <mat-hint>enter lastName</mat-hint>
+        <mat-error *ngIf="lastName?.invalid && lastName?.touched">require lastName</mat-error>
+    </mat-form-field>
+    <br> 
+    <br>
+    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+    <p *ngIf="this.typeimage != null">{{this.typeimage[0]}}.{{this.typeimage[1]}}</p>
+    <input hidden (change)="onImageSelected($event)" #fileInput type="file" id="file">
+    <mat-error *ngIf="!(acceptImage)">require file type PNG JPG JPEG BMP MAXIMUM 5MB</mat-error>
+    <br><br>
+    <button mat-raised-button type="submit" [disabled]="userRegistInfo.invalid || !(acceptImage) || !(PWnotpass)">submit register</button>
+    
+</form>
+<button mat-raised-button (click)="backToLogin()">back to login</button>

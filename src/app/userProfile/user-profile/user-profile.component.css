@@ -1,0 +1,28 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .grid-container {
+    display: inline-grid;
+    grid-template-columns: auto auto; 
+    padding: 5px;
+    width: 100%;
+    font-size: medium;
+  }
+  .grid-movie {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding:5px;  
+  }
+  .movie-card{
+    max-width: 400px;
+    margin: 3%; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,10);
+    transition: 0.3s;
+ }
